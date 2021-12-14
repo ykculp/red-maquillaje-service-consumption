@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "290585765420",
+    "project_id": "redmaquillaje-f4b49",
+    "storage_bucket": "redmaquillaje-f4b49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290585765420:android:095e1b3da20e7886a85389",
+        "android_client_info": {
+          "package_name": "com.example.misiontic_template"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290585765420-e6i65qvqbo49e3u2mu8qsdssfllsbm6l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.misiontic_template",
+            "certificate_hash": "6cdc5583f66aa683cd3a76bb535501eb243a2d3e"
+          }
+        },
+        {
+          "client_id": "290585765420-b4a130lni2t36ss0af2mcjvcop4a3i14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHGhCNXfUeUA-AsP6um5vodSqrjb7mogY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290585765420-b4a130lni2t36ss0af2mcjvcop4a3i14.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
