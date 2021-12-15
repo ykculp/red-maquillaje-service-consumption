@@ -18,7 +18,7 @@ class ContentPage extends StatelessWidget {
   Widget _getScreen(int index) {
     switch (index) {
       case 1:
-        return const UsersOffersScreen();
+        return const SocialScreen();
       case 2:
         return ProductScreen();
       case 3:
@@ -79,7 +79,7 @@ class ContentPage extends StatelessWidget {
                   Icons.public_outlined,
                   key: Key("offersSection"),
                 ),
-                label: 'Verificado',
+                label: 'Producto',
               ),
               BottomNavigationBarItem(
                 icon: Icon(

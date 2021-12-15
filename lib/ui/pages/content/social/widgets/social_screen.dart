@@ -10,7 +10,7 @@ class SocialScreen extends StatefulWidget {
 }
 
 class _State extends State<SocialScreen> {
-  final items = List<String>.generate(20, (i) => "Item $i");
+  final items = List<String>.generate(1, (i) => "Item $i");
 
   @override
   Widget build(BuildContext context) {
