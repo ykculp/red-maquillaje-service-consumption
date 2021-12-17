@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class LocationService implements MisionTicService {
   final String baseUrl = 'misiontic-2022-uninorte.herokuapp.com';
-  final String apiKey = 'wNLombyTzPIjLjkfp/aohu5b0Xy.iOM.4Sj4Q3.s9Ri9riyE6y5E2';
+  final String apiKey = 'ZtVeTqq/jRvlMIqROrbB0ePRX5O5HjKiDnjHFo3GSLGr2eJxOUYhS';
 
   @override
   Future<List<UserLocation>> fecthData({int limit = 5, Map? map}) async {

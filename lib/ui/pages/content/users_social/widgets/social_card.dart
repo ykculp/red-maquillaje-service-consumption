@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:misiontic_template/ui/widgets/card.dart';
 
 
-class UserOfferCard extends StatelessWidget {
+class UserSocialCard extends StatelessWidget {
   final String title, content, picUrl;
   final VoidCallback onChat, onTap;
 
   // PostCard constructor
-  const UserOfferCard({
+  const UserSocialCard({
     Key? key,
     required this.title,
     required this.content,

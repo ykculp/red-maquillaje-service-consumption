@@ -71,6 +71,7 @@ class _State extends State<StatesScreen> {
                       content: status.message,
                       picUrl: status.picUrl,
                       onDelete: () {
+                        
                         manager.removeStatus(status);
                       },
                     );

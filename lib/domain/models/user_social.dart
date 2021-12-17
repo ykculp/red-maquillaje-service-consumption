@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserJob {
+class UserSocial {
   String picUrl, name, email, message;
   String? dbRef;
 
-  UserJob({
+  UserSocial({
     required this.picUrl,
     required this.name,
     required this.email,
@@ -12,9 +12,9 @@ class UserJob {
     this.dbRef,
   });
 
-  factory UserJob.fromJson(Map<String, dynamic> map) {
+  factory UserSocial.fromJson(Map<String, dynamic> map) {
     final data = map["data"];
-    return UserJob(
+    return UserSocial(
         picUrl: data['picUrl'],
         name: data['name'],
         email: data['email'],

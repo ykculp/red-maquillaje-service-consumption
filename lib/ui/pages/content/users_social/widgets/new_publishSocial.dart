@@ -2,23 +2,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:misiontic_template/domain/models/user_job.dart';
+import 'package:misiontic_template/domain/models/user_social.dart';
+import 'package:misiontic_template/domain/models/user_status.dart';
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
-import 'package:misiontic_template/domain/use_case/jobs_management.dart';
+import 'package:misiontic_template/domain/use_case/social_management.dart';
 
+class PublishSocial extends StatefulWidget {
+  final SocialManager manager;
+  final UserSocial? userJob;
 
-class PublishOffer extends StatefulWidget {
-  final JobsManager manager;
-  final UserJob? userJob;
-
-  const PublishOffer({Key? key, required this.manager, this.userJob})
+  const PublishSocial({Key? key, required this.manager, this.userJob})
       : super(key: key);
 
   @override
   createState() => _State();
 }
 
-class _State extends State<PublishOffer> {
+class _State extends State<PublishSocial> {
   late AuthController controller;
   late bool _buttonDisabled;
   late TextEditingController offerController;
@@ -45,7 +45,7 @@ class _State extends State<PublishOffer> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "$_dialogAction Oferta",
+              "$_dialogAction Mensaje",
               style: Theme.of(context).textTheme.headline2,
             ),
             Padding(
@@ -57,7 +57,7 @@ class _State extends State<PublishOffer> {
                 maxLines: null,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Oferta',
+                  labelText: 'Mensaje',
                 ),
               ),
             ),
@@ -73,8 +73,9 @@ class _State extends State<PublishOffer> {
                             setState(() {
                               _buttonDisabled = true;
                               User user = controller.currentUser!;
-                              UserJob offer = UserJob(
-                                picUrl: user.photoURL!,
+                              UserSocial offer = UserSocial(
+                                picUrl: user.photoURL ??
+                                    "https://ui-avatars.com/api/?name=${user.displayName ?? 'User'}",
                                 name: user.displayName!,
                                 email: user.email!,
                                 message: offerController.text,
@@ -84,9 +85,9 @@ class _State extends State<PublishOffer> {
                               // it means that we are updating a previous one.
                               if (widget.userJob != null) {
                                 offer.dbRef = widget.userJob!.dbRef;
-                                task = widget.manager.updateOffer(offer);
+                                task = widget.manager.updatePublish(offer);
                               } else {
-                                task = widget.manager.sendOffer(offer);
+                                task = widget.manager.sendPublish(offer);
                               }
                               task.then(
                                 (value) => Get.back(),

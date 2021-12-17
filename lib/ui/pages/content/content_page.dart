@@ -4,11 +4,12 @@ import 'package:misiontic_template/domain/use_case/controllers/authentication.da
 import 'package:misiontic_template/domain/use_case/controllers/ui.dart';
 import 'package:misiontic_template/ui/pages/content/chats/chat_screen.dart';
 import 'package:misiontic_template/ui/pages/content/location/location_screen.dart';
-import 'package:misiontic_template/ui/pages/content/public_offers/public_offers_screen.dart';
+
 import 'package:misiontic_template/ui/pages/content/public_product/widgets/product_screen.dart';
-import 'package:misiontic_template/ui/pages/content/social/widgets/social_screen.dart';
+
 import 'package:misiontic_template/ui/pages/content/states/states_screen.dart';
-import 'package:misiontic_template/ui/pages/content/users_offers/users_offers_screen.dart';
+
+import 'package:misiontic_template/ui/pages/content/users_social/users_social_screen.dart';
 import 'package:misiontic_template/ui/widgets/appbar.dart';
 
 class ContentPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class ContentPage extends StatelessWidget {
   Widget _getScreen(int index) {
     switch (index) {
       case 1:
-        return const SocialScreen();
+        return const UsersSocialScreen();
       case 2:
         return ProductScreen();
       case 3:

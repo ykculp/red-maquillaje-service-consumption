@@ -1,33 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:misiontic_template/domain/models/user_job.dart';
+import 'package:misiontic_template/domain/models/user_social.dart';
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
 import 'package:misiontic_template/domain/use_case/controllers/connectivity.dart';
-import 'package:misiontic_template/domain/use_case/jobs_management.dart';
-import 'package:misiontic_template/ui/pages/content/users_offers/widgets/new_offer.dart';
-import 'package:misiontic_template/ui/pages/content/users_offers/widgets/offer_card.dart';
+import 'package:misiontic_template/domain/use_case/social_management.dart';
+import 'package:misiontic_template/ui/pages/content/chats/chat_screen.dart';
+import 'package:misiontic_template/ui/pages/content/states/states_screen.dart';
+import 'package:misiontic_template/ui/pages/content/users_social/widgets/new_publishSocial.dart';
+import 'package:misiontic_template/ui/pages/content/users_social/widgets/social_card.dart';
 
-
-class UsersOffersScreen extends StatefulWidget {
+class UsersSocialScreen extends StatefulWidget {
   // UsersOffersScreen empty constructor
-  const UsersOffersScreen({Key? key}) : super(key: key);
+  const UsersSocialScreen({Key? key}) : super(key: key);
 
   @override
   _State createState() => _State();
 }
 
-class _State extends State<UsersOffersScreen> {
-  late final JobsManager manager;
-  late Stream<QuerySnapshot<Map<String, dynamic>>> offersStream;
+class _State extends State<UsersSocialScreen> {
+  late final SocialManager manager;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> publishStream;
   late ConnectivityController controller;
   late AuthController authController;
 
   @override
   void initState() {
     super.initState();
-    manager = JobsManager();
-    offersStream = manager.getJobsStream();
+    manager = SocialManager();
+    publishStream = manager.getPublishStream();
     controller = Get.find<ConnectivityController>();
     authController = Get.find<AuthController>();
   }
@@ -45,7 +46,7 @@ class _State extends State<UsersOffersScreen> {
                 // We don't allow to trigger the action if we don't have connectivity
                 if (controller.connected) {
                   Get.dialog(
-                    PublishOffer(
+                    PublishSocial(
                       manager: manager,
                     ),
                   );
@@ -61,34 +62,37 @@ class _State extends State<UsersOffersScreen> {
         ),
         Expanded(
           child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream: offersStream,
+            stream: publishStream,
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (snapshot.hasData) {
-                final items = manager.extractOffers(snapshot.data!);
+                final items = manager.extractPublish(snapshot.data!);
                 return ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    UserJob offer = items[index];
-                    return UserOfferCard(
-                      title: offer.name,
-                      content: offer.message,
-                      picUrl: offer.picUrl,
-                      onChat: () {},
+                    UserSocial publish = items[index];
+                    return UserSocialCard(
+                      title: publish.name,
+                      content: publish.message,
+                      picUrl: publish.picUrl,
+                      onChat: () {
+                        // Get.to(const UserMessages());
+                      },
                       onTap: () {
                         // If the offer email is the same as the current user,
                         // we know that the user is the owner of that offer.
-                        if (offer.email == authController.currentUser?.email) {
+                        if (publish.email ==
+                            authController.currentUser?.email) {
                           Get.dialog(
-                            PublishOffer(
+                            PublishSocial(
                               manager: manager,
-                              userJob: offer,
+                              userJob: publish,
                             ),
                           );
                         } else {
                           Get.snackbar(
                             "No Autorizado",
-                            "No puedes editar esta oferta debido a que fue enviada por otro usuario.",
+                            "No puedes editar esta publicación debido a que fue enviada por otro usuario.",
                           );
                         }
                       },
