@@ -128,11 +128,13 @@ class _State extends State<LoginScreen> {
                   )
                 ],
               ),
+              
               TextButton(
                 key: const Key("toSignUpButton"),
                 child: const Text(
-                  "Registrarse",
-                  style: TextStyle(color: Colors.pink),
+                  "Aun no tienes cuenta?. Registrate!",
+                  style: TextStyle(color: Color(0xFFF8BBD0)),
+                  
                 ),
                 onPressed: widget.onViewSwitch,
               ),
