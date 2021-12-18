@@ -35,7 +35,14 @@ class _State extends State<StatesScreen> {
         Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: Center(
-            child: ElevatedButton(
+            child: MaterialButton(
+              height: 60,
+              minWidth: 150,
+              color: Colors.pinkAccent,
+              textColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
               child: const Text("Agregar"),
               onPressed: () {
                 // We don't allow to trigger the action if we don't have connectivity
@@ -71,7 +78,6 @@ class _State extends State<StatesScreen> {
                       content: status.message,
                       picUrl: status.picUrl,
                       onDelete: () {
-                        
                         manager.removeStatus(status);
                       },
                     );

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
 import 'package:misiontic_template/domain/use_case/controllers/connectivity.dart';
 
-
 class SignUpScreen extends StatefulWidget {
   final VoidCallback onViewSwitch;
 
@@ -27,11 +26,15 @@ class _State extends State<SignUpScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               "Creación de usuario",
-              style: Theme.of(context).textTheme.headline1,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+              // style: Theme.of(context).textTheme.headline1,
             ),
           ),
           Padding(
@@ -40,7 +43,20 @@ class _State extends State<SignUpScreen> {
               key: const Key("signUpName"),
               controller: nameController,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Color(0xFFF8BBD0),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderSide: BorderSide(color: Colors.pink),
+                ),
+                labelStyle: TextStyle(color: Color(0xFFF8BBD0)),
                 labelText: 'Usuario',
               ),
             ),
@@ -51,7 +67,20 @@ class _State extends State<SignUpScreen> {
               key: const Key("signUpEmail"),
               controller: emailController,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Color(0xFFF8BBD0),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderSide: BorderSide(color: Colors.pink),
+                ),
+                labelStyle: TextStyle(color: Color(0xFFF8BBD0)),
                 labelText: 'Correo electrónico',
               ),
             ),
@@ -64,7 +93,20 @@ class _State extends State<SignUpScreen> {
               obscureText: true,
               obscuringCharacter: "*",
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                prefixIcon: Icon(
+                  Icons.vpn_key,
+                  color: Color(0xFFF8BBD0),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderSide: BorderSide(color: Colors.pink),
+                ),
+                labelStyle: TextStyle(color: Color(0xFFF8BBD0)),
                 labelText: 'Clave',
               ),
             ),
@@ -75,7 +117,14 @@ class _State extends State<SignUpScreen> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
-                  child: ElevatedButton(
+                  child: MaterialButton(
+                    height: 60,
+                    minWidth: double.infinity,
+                    color: Colors.pinkAccent,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     onPressed: () async {
                       if (connectivityController.connected) {
                         await controller.manager.signUp(
@@ -91,7 +140,13 @@ class _State extends State<SignUpScreen> {
                         );
                       }
                     },
-                    child: const Text("Registrar"),
+                    child: const Text(
+                      "Registrar",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -99,7 +154,10 @@ class _State extends State<SignUpScreen> {
           ),
           TextButton(
             onPressed: widget.onViewSwitch,
-            child: const Text("Entrar"),
+            child: const Text(
+              "Entrar",
+              style: TextStyle(color: Color(0xFFF8BBD0)),
+            ),
           ),
         ],
       ),
