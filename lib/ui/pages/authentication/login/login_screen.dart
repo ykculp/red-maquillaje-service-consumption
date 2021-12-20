@@ -1,9 +1,12 @@
-import 'dart:ui';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:misiontic_template/data/services/database.dart';
+
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
 import 'package:misiontic_template/domain/use_case/controllers/connectivity.dart';
+import 'package:misiontic_template/helper/constants.dart';
+import 'package:misiontic_template/helper/helpperfunctions.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onViewSwitch;
@@ -19,6 +22,7 @@ class _State extends State<LoginScreen> {
   final passwordController = TextEditingController();
   final controller = Get.find<AuthController>();
   final connectivityController = Get.find<ConnectivityController>();
+  DatabaseMethods dataBaseMethods = DatabaseMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +108,21 @@ class _State extends State<LoginScreen> {
                         ),
                         onPressed: () async {
                           if (connectivityController.connected) {
-                            await controller.manager.signIn(
-                                email: emailController.text,
-                                password: passwordController.text);
+                            controller.manager
+                                .signIn(
+                                    email: emailController.text,
+                                    password: passwordController.text)
+                                .then((result) async {
+                              QuerySnapshot userInfoSnapshot = DatabaseMethods()
+                                  .getUserInfo(emailController.text);
+
+                              HelperFunctions.saveUserLoggedInSharedPreference(
+                                  true);
+                              HelperFunctions.saveUserNameSharedPreference(
+                                  userInfoSnapshot.docs[0]["name"]);
+                              HelperFunctions.saveUserEmailSharedPreference(
+                                  userInfoSnapshot.docs[1]["email"]);
+                            });
                           } else {
                             Get.showSnackbar(
                               GetBar(

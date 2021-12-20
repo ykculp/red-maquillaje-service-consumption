@@ -67,7 +67,7 @@ class _State extends State<PublishDialog> {
                               User user = controller.currentUser!;
                               UserStatus status = UserStatus(
                                 picUrl: user.photoURL ??
-                                    "https://ui-avatars.com/api/?name=${user.displayName ?? 'User'}",
+                                    "https://ui-avatars.com/api/?name=${user.displayName ?? 'user'}",
                                 name: user.displayName!,
                                 email: user.email!,
                                 message: stateController.text,

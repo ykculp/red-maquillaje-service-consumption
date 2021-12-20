@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
 import 'package:misiontic_template/domain/use_case/controllers/ui.dart';
+import 'package:misiontic_template/ui/pages/chat/chatRoomsScreen.dart';
+import 'package:misiontic_template/ui/pages/chat/chat_page.dart';
+import 'package:misiontic_template/ui/pages/chat/messages/chatrooms.dart';
 import 'package:misiontic_template/ui/pages/content/chats/chat_screen.dart';
 import 'package:misiontic_template/ui/pages/content/location/location_screen.dart';
 
@@ -25,7 +28,7 @@ class ContentPage extends StatelessWidget {
       case 3:
         return LocationScreen();
       case 4:
-        return const UserMessages();
+        return  ChatRoom();
       default:
         return const StatesScreen();
     }

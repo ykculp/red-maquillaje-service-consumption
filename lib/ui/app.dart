@@ -15,6 +15,7 @@ import 'package:misiontic_template/domain/use_case/controllers/permissions.dart'
 import 'package:misiontic_template/domain/use_case/controllers/ui.dart';
 import 'package:misiontic_template/domain/use_case/permission_management.dart';
 import 'package:misiontic_template/domain/use_case/theme_management.dart';
+import 'package:misiontic_template/helper/helpperfunctions.dart';
 import 'package:misiontic_template/ui/pages/authentication/auth_page.dart';
 import 'package:misiontic_template/ui/pages/content/content_page.dart';
 import 'package:misiontic_template/ui/theme/theme.dart';
@@ -29,7 +30,20 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   // The future is part of the state of our widget. We should not call `initializeApp`
   // directly inside [build].
+  late bool userIsLoggedIn;
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  getLoggedInState() async {
+    await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
+      setState(() {
+        userIsLoggedIn = value!;
+      });
+    });
+  }
 
   // This widget is the root of your application.
   @override
@@ -116,7 +130,8 @@ class _AppState extends State<App> {
 
     Get.put(LocationController());
     //Notification controller
-    NotificationController notificationController = Get.put(NotificationController());
+    NotificationController notificationController =
+        Get.put(NotificationController());
     notificationController.initialize();
   }
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:misiontic_template/data/services/database.dart';
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
 import 'package:misiontic_template/domain/use_case/controllers/connectivity.dart';
+import 'package:misiontic_template/helper/helpperfunctions.dart';
 
 class SignUpScreen extends StatefulWidget {
   final VoidCallback onViewSwitch;
@@ -18,6 +20,7 @@ class _State extends State<SignUpScreen> {
   final passwordController = TextEditingController();
   final controller = Get.find<AuthController>();
   final connectivityController = Get.find<ConnectivityController>();
+  DatabaseMethods databaseMethods = DatabaseMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +134,17 @@ class _State extends State<SignUpScreen> {
                             name: nameController.text,
                             email: emailController.text,
                             password: passwordController.text);
+                        Map<String, String> userInfoMap = {
+                          "name": nameController.text,
+                          "email": emailController.text,
+                        };
+                        HelperFunctions.saveUserEmailSharedPreference(
+                            emailController.text);
+                        HelperFunctions.saveUserNameSharedPreference(
+                            nameController.text);
+
+                        databaseMethods.addUserInfo(userInfoMap);
+                        HelperFunctions.saveUserLoggedInSharedPreference(true);
                       } else {
                         Get.showSnackbar(
                           GetBar(
