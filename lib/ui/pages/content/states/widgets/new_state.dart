@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:misiontic_template/domain/models/user_status.dart';
 import 'package:misiontic_template/domain/use_case/controllers/authentication.dart';
 import 'package:misiontic_template/domain/use_case/status_management.dart';
+import 'package:misiontic_template/helper/constants.dart';
 
 class PublishDialog extends StatefulWidget {
   final StatusManager manager;
@@ -67,8 +68,8 @@ class _State extends State<PublishDialog> {
                               User user = controller.currentUser!;
                               UserStatus status = UserStatus(
                                 picUrl: user.photoURL ??
-                                    "https://ui-avatars.com/api/?name=${user.displayName ?? 'user'}",
-                                name: user.displayName!,
+                                    "https://ui-avatars.com/api/?name=${Constants.myName}",
+                                name:Constants.myName,
                                 email: user.email!,
                                 message: stateController.text,
                               );

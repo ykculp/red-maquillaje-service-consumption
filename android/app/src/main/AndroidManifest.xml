@@ -9,7 +9,7 @@
     </intent>
   </queries> 
   <application
-        android:label="maquillaje_template"
+        android:label="Red Makeup"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

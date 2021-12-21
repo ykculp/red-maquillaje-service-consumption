@@ -113,15 +113,16 @@ class _State extends State<LoginScreen> {
                                     email: emailController.text,
                                     password: passwordController.text)
                                 .then((result) async {
-                              QuerySnapshot userInfoSnapshot = DatabaseMethods()
-                                  .getUserInfo(emailController.text);
+                              QuerySnapshot userInfoSnapshot =
+                                  await DatabaseMethods()
+                                      .getUserInfo(emailController.text);
 
                               HelperFunctions.saveUserLoggedInSharedPreference(
                                   true);
                               HelperFunctions.saveUserNameSharedPreference(
                                   userInfoSnapshot.docs[0]["name"]);
                               HelperFunctions.saveUserEmailSharedPreference(
-                                  userInfoSnapshot.docs[1]["email"]);
+                                  userInfoSnapshot.docs[0]["email"]);
                             });
                           } else {
                             Get.showSnackbar(
